@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public class HealthBarController : MonoBehaviour
 {
-    [SerializeField] private Slider healthbar;
+    private Slider healthbar;
     private Health health;
     private int healthAmount = 10;
 
