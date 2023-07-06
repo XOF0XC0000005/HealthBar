@@ -1,5 +1,8 @@
-public class Health
+using UnityEngine;
+
+public class Health : MonoBehaviour
 {
+    private const float HealthAmount = 0.1f;
     private float _maxHealth;
     private float _currentHealth;
 
@@ -14,5 +17,15 @@ public class Health
     {
         get { return _currentHealth; }
         set { _currentHealth = value; }
+    }
+
+    public float GetHeal()
+    {
+        return _currentHealth += HealthAmount;
+    }
+
+    public float GetDamage()
+    {
+        return _currentHealth -= HealthAmount;
     }
 }
