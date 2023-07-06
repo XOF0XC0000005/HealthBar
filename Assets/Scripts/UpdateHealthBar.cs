@@ -19,53 +19,42 @@ public class UpdateHealthBar : MonoBehaviour
         _lastRoutine = null;
     }
 
-    private IEnumerator IncreaseSlider()
+    private IEnumerator ManipulateSlider()
     {
-        float targetHealthValue = _health.GetHeal();
-
-        while (_healthbar.value != targetHealthValue)
+        while (_healthbar.value != _health.CurrentHealth)
         {
-            _healthbar.value = Mathf.MoveTowards(_healthbar.value, targetHealthValue, _ValueSpeed);
-            yield return null;
-        }
-    }
-
-    private IEnumerator DecreaseSlider()
-    {
-        float targetHealthValue = _health.GetDamage();
-
-        while (_healthbar.value != targetHealthValue)
-        {
-            _healthbar.value = Mathf.MoveTowards(_healthbar.value, targetHealthValue, _ValueSpeed);
+            _healthbar.value = Mathf.MoveTowards(_healthbar.value, _health.CurrentHealth, _ValueSpeed);
             yield return null;
         }
     }
 
     public void Healing()
     {
+        _health.ChangedHealth.AddListener(_health.Increase);
+        _health.ChangedHealth.Invoke();
+
         if (_lastRoutine != null)
         {
             StopCoroutine(_lastRoutine);
             _lastRoutine = null;
-            _lastRoutine = StartCoroutine(IncreaseSlider());
         }
-        else
-        {
-            _lastRoutine = StartCoroutine(IncreaseSlider());
-        }
+       
+        _lastRoutine = StartCoroutine(ManipulateSlider());
+        _health.ChangedHealth.RemoveListener(_health.Increase);
     }
 
     public void Damaging()
     {
+        _health.ChangedHealth.AddListener(_health.Decrease);
+        _health.ChangedHealth.Invoke();
+
         if (_lastRoutine != null)
         {
             StopCoroutine(_lastRoutine);
             _lastRoutine = null;
-            _lastRoutine = StartCoroutine(DecreaseSlider());
         }
-        else
-        {
-            _lastRoutine = StartCoroutine(DecreaseSlider());
-        }
+
+        _lastRoutine = StartCoroutine(ManipulateSlider());
+        _health.ChangedHealth.RemoveListener(_health.Decrease);
     }
 }

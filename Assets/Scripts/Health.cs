@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
     private const float HealthAmount = 0.1f;
     private float _maxHealth;
     private float _currentHealth;
+    public UnityEvent _changedHealth = new UnityEvent();
 
     public Health()
     {
@@ -18,14 +20,19 @@ public class Health : MonoBehaviour
         get { return _currentHealth; }
         set { _currentHealth = value; }
     }
-
-    public float GetHeal()
+    public UnityEvent ChangedHealth
     {
-        return _currentHealth += HealthAmount;
+        get { return _changedHealth; }
+        set { _changedHealth = value; }
     }
 
-    public float GetDamage()
+    public void Increase()
     {
-        return _currentHealth -= HealthAmount;
+        _currentHealth += HealthAmount;
+    }
+
+    public void Decrease()
+    {
+        _currentHealth -= HealthAmount;
     }
 }
