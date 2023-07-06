@@ -1,15 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Health
 {
-    private int healthAmount;
+    private float _maxHealth;
+    private float _currentHealth;
 
-    public Health(int health)
+    public Health()
     {
-        healthAmount = health;
+        _maxHealth = 1;
+        _currentHealth = 0;
     }
 
-    public int HealthAmount => healthAmount;
+    public float MaxAmount => _maxHealth;
+    public float CurrentHealth
+    {
+        get { return _currentHealth; }
+        set { _currentHealth = value; }
+    }
 }
