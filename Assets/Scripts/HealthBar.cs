@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
@@ -18,40 +18,32 @@ public class HealthBar : MonoBehaviour
     {
         _healthbar = GetComponent<Slider>();
         _health = GetComponent<Health>();
+        _health.ChangedHealth += MakeAction;
         _lastRoutine = null;
     }
 
-    private IEnumerator ManipulateSlider()
+    private void OnDestroy()
     {
-        while (_healthbar.value != _health.CurrentHealth)
+        _health.ChangedHealth -= MakeAction;
+    }
+
+    private IEnumerator ManipulateSlider(float targetHealth)
+    {
+        while (_healthbar.value != targetHealth)
         {
-            _healthbar.value = Mathf.MoveTowards(_healthbar.value, _health.CurrentHealth, _ValueSpeed);
+            _healthbar.value = Mathf.MoveTowards(_healthbar.value, targetHealth, _ValueSpeed);
             yield return null;
         }
     }
 
-    private void MakeAction(UnityAction action)
+    private void MakeAction(float value)
     {
-        _health.ChangedHealth.AddListener(action);
-        _health.ChangedHealth.Invoke();
-
         if (_lastRoutine != null)
         {
             StopCoroutine(_lastRoutine);
             _lastRoutine = null;
         }
 
-        _lastRoutine = StartCoroutine(ManipulateSlider());
-        _health.ChangedHealth.RemoveListener(action);
-    }
-
-    public void Healing()
-    {
-        MakeAction(_health.Increase);
-    }
-
-    public void Damaging()
-    {
-        MakeAction(_health.Decrease);
+        _lastRoutine = StartCoroutine(ManipulateSlider(value));
     }
 }

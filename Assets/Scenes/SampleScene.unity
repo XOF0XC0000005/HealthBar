@@ -360,15 +360,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1673825221}
-        m_TargetAssemblyTypeName: UpdateHealthBar, Assembly-CSharp
-        m_MethodName: Healing
-        m_Mode: 1
+      - m_Target: {fileID: 1673825222}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Increase
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -906,9 +906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3a9e6bb854ded42bf00de4d6885dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _changedHealth:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1681914616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,15 +1128,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1673825221}
-        m_TargetAssemblyTypeName: UpdateHealthBar, Assembly-CSharp
-        m_MethodName: Damaging
-        m_Mode: 1
+      - m_Target: {fileID: 1673825222}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Decrease
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
+          m_FloatArgument: 0.1
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

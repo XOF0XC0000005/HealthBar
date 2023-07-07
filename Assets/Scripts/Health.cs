@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 
     private float _maxHealth;
     private float _currentHealth;
-    public UnityEvent _changedHealth = new UnityEvent();
+    public UnityAction<float> _changedHealth;
 
     private void Awake()
     {
@@ -21,19 +21,17 @@ public class Health : MonoBehaviour
         get { return _currentHealth; }
         set { _currentHealth = value; }
     }
-    public UnityEvent ChangedHealth
+    public UnityAction<float> ChangedHealth { get; set; }
+
+    public void Increase(float healthAmount)
     {
-        get { return _changedHealth; }
-        set { _changedHealth = value; }
+        _currentHealth += healthAmount;
+        ChangedHealth.Invoke(_currentHealth);
     }
 
-    public void Increase()
+    public void Decrease(float healthAmount)
     {
-        _currentHealth += HealthAmount;
-    }
-
-    public void Decrease()
-    {
-        _currentHealth -= HealthAmount;
+        _currentHealth -= healthAmount;
+        ChangedHealth.Invoke(_currentHealth);
     }
 }
