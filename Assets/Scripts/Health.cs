@@ -3,8 +3,6 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    private const float HealthAmount = 0.1f;
-
     private float _maxHealth;
     private float _currentHealth;
     public event UnityAction<float> _changedHealth;
