@@ -7,7 +7,7 @@ public class Health : MonoBehaviour
 
     private float _maxHealth;
     private float _currentHealth;
-    public UnityAction<float> _changedHealth;
+    public event UnityAction<float> _changedHealth;
 
     private void Awake()
     {
