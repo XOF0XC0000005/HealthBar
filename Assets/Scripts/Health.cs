@@ -4,11 +4,12 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     private const float HealthAmount = 0.1f;
+
     private float _maxHealth;
     private float _currentHealth;
     public UnityEvent _changedHealth = new UnityEvent();
 
-    public Health()
+    private void Awake()
     {
         _maxHealth = 1;
         _currentHealth = 0;
