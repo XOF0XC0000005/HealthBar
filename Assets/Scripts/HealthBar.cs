@@ -8,10 +8,12 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private const float _ValueSpeed = 0.001f;
+    private const float _ValueSpeed = 0.1f;
 
     private Coroutine _lastRoutine;
+
     private Slider _healthbar;
+
     private Health _health;
 
     private void Awake()
@@ -31,7 +33,7 @@ public class HealthBar : MonoBehaviour
     {
         while (_healthbar.value != targetHealth)
         {
-            _healthbar.value = Mathf.MoveTowards(_healthbar.value, targetHealth, _ValueSpeed);
+            _healthbar.value = Mathf.MoveTowards(_healthbar.value, targetHealth, _ValueSpeed * Time.deltaTime);
             yield return null;
         }
     }
